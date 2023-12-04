@@ -1,0 +1,14 @@
+- name: My first play
+  hosts: localhost
+  tasks:
+   - name: Ping my hosts
+     ansible.builtin.ping:
+
+   - name: Print message
+     ansible.builtin.debug:
+      msg: Hello world
+   - name: "just execute a ls -lrt command"
+     shell: "ls -lrt"
+     register: "output"
+
+   - debug: var=output.stdout_lines 

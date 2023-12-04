@@ -1,0 +1,18 @@
+version: '3'
+services:
+  ansible:
+    container_name: ansible
+    image: ansible:latest  # Certifique-se de substituir pela tag correta ou pela imagem correta
+
+  docker:
+    container_name: docker-container
+    image: docker:dind
+    privileged: true
+    command: dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375
+
+  jenkins:
+    container_name: jenkins-blueocean
+    image: myjenkins-blueocean:2.426.1-1  # Certifique-se de substituir pela tag correta ou pela imagem correta
+    ports:
+      - "8080:8080"
+      - "50000:50000"
