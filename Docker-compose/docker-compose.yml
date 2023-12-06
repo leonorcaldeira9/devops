@@ -2,7 +2,7 @@ version: '3'
 services:
   ansible:
     container_name: ansible
-    image: ansible:latest  # Certifique-se de substituir pela tag correta ou pela imagem correta
+    image: ansible:latest  
 
   docker:
     container_name: docker-container
@@ -12,7 +12,7 @@ services:
 
   jenkins:
     container_name: jenkins-blueocean
-    image: myjenkins-blueocean:2.426.1-1  # Certifique-se de substituir pela tag correta ou pela imagem correta
+    image: myjenkins-blueocean:2.426.1-1  
     ports:
       - "8080:8080"
       - "50000:50000"
