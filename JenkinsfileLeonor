@@ -8,7 +8,11 @@ pipeline {
        }
     }
  }
-   
+
+ triggers {
+   githubPush()
+ }
+
  post {
   always {
     script{
