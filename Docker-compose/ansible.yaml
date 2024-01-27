@@ -1,14 +1,14 @@
-- name: My first play
-  hosts: localhost
-  tasks:
-   - name: Ping my hosts
-     ansible.builtin.ping:
+- name: My first play # Nome do playbook, útil para a identificação.
+  hosts: localhost # Especifica que as tarefas serão executadas no localhost.
+  tasks:  # Lista de tarefas a serem executadas.
+   - name: Ping my hosts # Nome da tarefa, para a identificação
+     ansible.builtin.ping:  # Utiliza o módulo 'ping' do Ansible. Este módulo testa a conectividade com o host.
 
-   - name: Print message
-     ansible.builtin.debug:
-      msg: Hello world
-   - name: "just execute a ls -lrt command"
-     shell: "ls -lrt"
-     register: "output"
+   - name: Print message # Nome da próxima tarefa.
+     ansible.builtin.debug:  # Utiliza o módulo 'debug' para exibir mensagens.
+      msg: Hello world # Mensagem a ser exibida.
+   - name: "just execute a ls -lrt command" # Nome da próxima tarefa.
+     shell: "ls -lrt" # Utiliza o módulo 'shell' para executar o comando 'ls -lrt'.
+     register: "output" # Regista a saída do comando na variável 'output'.
 
-   - debug: var=output.stdout_lines 
+   - debug: var=output.stdout_lines # Exibe a saída do comando 'ls -lrt' linha por linha.

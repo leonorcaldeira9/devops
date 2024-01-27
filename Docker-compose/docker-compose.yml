@@ -1,18 +1,21 @@
-version: '3'
+version: '3' # Especifica a versão da sintaxe do Docker Compose.
 services:
+  # Configuração do serviço do Ansible.
   ansible:
-    container_name: ansible
-    image: ansible:latest  
+    container_name: ansible # Define o nome do container como 'ansible'.
+    image: ansible:latest  # Usa a imagem mais recente do Ansible.
 
+  # Configuração do serviço do Docker.
   docker:
-    container_name: docker-container
-    image: docker:dind
-    privileged: true
-    command: dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375
+    container_name: docker-container # Define o nome do container como 'docker-container'.
+    image: docker:dind # Usa a imagem do Docker-in-Docker, permitindo "rodar" o Docker dentro de um container.
+    privileged: true # Executa o container no modo privilegiado, necessário para executar Docker-in-Docker.
+    command: dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 # Inicia o daemon do Docker, disponibilizando-o através de um Unix socket e também na porta 2375 TCP para conexões de rede.
 
+  # Configuração do serviço do Jenkins.
   jenkins:
-    container_name: jenkins-blueocean
-    image: myjenkins-blueocean:2.426.1-1  
+    container_name: jenkins-blueocean # Define o nome do container como 'jenkins-blueocean'.
+    image: myjenkins-blueocean:2.426.1-1  # Usa uma imagem personalizada do Jenkins Blue Ocean, uma versão específica.
     ports:
-      - "8080:8080"
-      - "50000:50000"
+      - "8080:8080"  # Mapeia a porta 8080 do container para a porta 8080 do host, usada para a interface web do Jenkins.
+      - "50000:50000" # Mapeia a porta 50000 do container para a mesma porta do host, usada para comunicação de agentes com o master do Jenkins.
