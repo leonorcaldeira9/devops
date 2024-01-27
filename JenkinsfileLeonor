@@ -1,27 +1,29 @@
 pipeline {
- agent any
+ agent any //O pipeline pode ser executado em qualquer agente disponível.
 
  stages {
-    stage('Build') {
+    stage('Build') { //Define uma etapa na pipeline chamada de 'Build'.
        steps {
-          echo 'Hello World!'
+          echo 'Hello World!' // Um passo simples que executa a mensagem 'Hello World!' no log de saída.
        }
     }
  }
 
  triggers {
-   githubPush()
+   githubPush() // Trigger que inicia a pipeline sempre que há um push para o repositório do GitHub que está a ser usado (neste caso, o repositório "devops").
  }
 
  post {
-  always {
-    script{
-      status = currentBuild.currentResult.toString().toLowerCase()
-      color = status == 'success' ? '00ff00' : 'ff0000'
-      message = "The ${env.JOB_NAME} build ${status} with #${env.BUILD_NUMBER}"
+  always { // Bloco de pós-execução que é executado independentemente do resultado do pipeline.
+    script{ // Permite a execução de um script.
+      status = currentBuild.currentResult.toString().toLowerCase() // Obtém o resultado da build e converte para minúsculas.
+      color = status == 'success' ? '00ff00' : 'ff0000' // Define a cor como verde se a build for bem-sucedida, e vermelho caso contrário.
+      message = "The ${env.JOB_NAME} build ${status} with #${env.BUILD_NUMBER}" // Constrói a mensagem com as informações da build.
       url = "https://softinsacorp.webhook.office.com/webhookb2/e9b9bec4-7d3b-49a8-90c9-c70f83651c2a@39c83d5e-cede-42d1-962f-c6a853ab7cf5/IncomingWebhook/c2d11c488ac347729e3e8ff7e0c42f10/e5cbcec9-eaa9-4c67-9c87-04d38f7f582a"
+      //Define o URL do webhook do Office 365 Connector.
 
       office365ConnectorSend message: message, color: color, webhookUrl: url
+      // Envia a mensagem para o webhook do Office 365, que pode ser usado para notificações, por exemplo, no Microsoft Teams.
      }
    } 
  }
