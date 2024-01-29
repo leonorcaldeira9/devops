@@ -4,7 +4,7 @@ pipeline {
  stages {
     stage('Build') { //Define uma etapa na pipeline chamada de 'Build'.
        steps {
-          echo 'Hello World!' // Um passo simples que executa a mensagem 'Hello World!' no log de saída.
+          echo 'Hello World, this is Leonor!' // Um passo simples que executa a mensagem 'Hello World!' no log de saída.
        }
     }
  }
